@@ -19,9 +19,6 @@ pipeline {
           bat 'jmeter -n -t jmeter-left.jmx -l results.jtl'
         }
 post {
-   perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: 'results.jtl'
-    }
-post {
   success {
    perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: 'results.jtl' 
   }
