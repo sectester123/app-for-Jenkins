@@ -10,7 +10,7 @@ pipeline {
         ], extensions: [], userRemoteConfigs: [
           [credentialsId: 'sectester123', url: 'https://github.com/sectester123/app-for-Jenkins.git']
         ]])
-        bat "ls"
+        bat "dir"
       }
     }
     stage('ExecuteTest') {
