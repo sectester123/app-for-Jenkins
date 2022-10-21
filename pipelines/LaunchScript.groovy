@@ -10,13 +10,13 @@ pipeline {
         ], extensions: [], userRemoteConfigs: [
           [credentialsId: 'sectester123', url: 'https://github.com/sectester123/app-for-Jenkins.git']
         ]])
-        sh "ls -lart ./*"
+        bat "ls"
       }
     }
     stage('ExecuteTest') {
       steps {
         dir("${WORKSPACE}/scripts") {
-          sh 'jmeter -n -t jmeter-left.jmx -l results.jtl'
+          bat 'jmeter -n -t jmeter-left.jmx -l results.jtl'
         }
 post {
    perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: 'results.jtl'
