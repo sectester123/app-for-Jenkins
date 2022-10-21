@@ -18,7 +18,7 @@ pipeline {
         dir("${WORKSPACE}/scripts") {
           bat 'jmeter -n -t jmeter-left.jmx -l results.jtl'
         }
-    stage('ExecuteTest') {
+    stage('AnalyzeResults') {
       perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: 'results.jtl' 
   }
 }
