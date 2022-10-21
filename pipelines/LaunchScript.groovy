@@ -1,22 +1,22 @@
 pipeline {
   agent {
-    label 'balancer'
+    label 'master'
   }
   stages {
     stage('Checkout') {
       steps {
         checkout([$class: 'GitSCM', branches: [
-          [name: '*/QA_Performance']
+          [name: '*/master']
         ], extensions: [], userRemoteConfigs: [
-          [credentialsId: 'NewUser1234', url: 'https://NewUser1234@bitbucket.org/db_ecommerce/commerce-cloud.git']
+          [credentialsId: 'sectester123', url: 'https://github.com/sectester123/app-for-Jenkins.git']
         ]])
         sh "ls -lart ./*"
       }
     }
     stage('ExecuteTest') {
       steps {
-        dir("${WORKSPACE}/QA/Jmeter") {
-          sh 'jmeter -n -t Master.jmx -l results.jtl'
+        dir("${WORKSPACE}/scripts") {
+          sh 'jmeter -n -t jmeter-left.jmx -l results.jtl'
         }
 post {
    perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: 'results.jtl'
