@@ -19,9 +19,11 @@ pipeline {
           bat 'jmeter -n -t jmeter-left.jmx -l results.jtl'
         }
     stage('AnalyzeResults') {
-      perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: 'results.jtl' 
+      steps {
+        perfReport filterRegex: '', showTrendGraphs: true, sourceDataFiles: 'results.jtl' 
   }
 }
       }
     }
   }
+}
